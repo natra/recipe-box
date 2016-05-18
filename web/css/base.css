@@ -1,0 +1,54 @@
+/* bez #FFEBCF */
+/* granat #110D23 */
+/* fiolet #987583 */
+/* blekit #AEC8DA */
+/* jasny #F2F9FD */
+
+body {
+	
+	background-color: #F2F9FD;
+	margin-top: 10px;
+}
+
+header, footer {
+	margin: 0 auto;
+}
+
+main {
+	text-align: center;
+	padding: 20px 0;
+	border-top: 1px dashed #987583;
+}
+
+.navbar-default {
+	background-color: #F2F9FD;
+	border: 0;
+	margin-bottom: 10px;
+}
+
+.navbar-brand {
+	padding-left: 0;
+	color: #110D23;
+	font-weight: bold;
+}
+
+.mainNav {
+	padding: 0;
+}
+
+h1 {
+	font-size: 20px; 
+}
+
+h1 a:hover {
+	text-decoration: none;
+	color: #000;
+}
+
+footer {
+	clear: both;
+	color: #110D23;
+	padding: 20px 0;
+	border-top: 1px dashed #987583;
+	text-align: center;
+}
