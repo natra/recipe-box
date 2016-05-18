@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
+    <h1>Create new account</h1>
+    <div class="session_form_container">
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {# {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_errors(form.username) }}
+            {{ form_widget(form.username) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.password) }}
+            {{ form_widget(form.password) }}
+            <input type="submit" value="Create" class="btn btn-primary create-btn" />
+        {{ form_end(form) }}
+    </div>
     <ul>
         <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
+            <a href="{{ path('user_index') }}" class="btn btn-default">Back to the list</a>
         </li>
     </ul>
 {% endblock %}
