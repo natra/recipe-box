@@ -28,6 +28,11 @@ class Direction
      */
     private $step;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="directions")
+     * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
+     */
+    private $recipe;
 
     /**
      * Get id
@@ -60,5 +65,28 @@ class Direction
     public function getStep()
     {
         return $this->step;
+    }
+
+    /**
+     * Set recipe
+     *
+     * @param \AppBundle\Entity\Recipe $recipe
+     * @return Direction
+     */
+    public function setRecipe(\AppBundle\Entity\Recipe $recipe = null)
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * Get recipe
+     *
+     * @return \AppBundle\Entity\Recipe 
+     */
+    public function getRecipe()
+    {
+        return $this->recipe;
     }
 }

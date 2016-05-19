@@ -64,9 +64,15 @@ class Recipe
      */
     private $ingredients;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Direction", mappedBy="recipe")
+     */
+    private $directions;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
+        $this->directions = new ArrayCollection();
     }
 
     public function getId()
@@ -198,5 +204,38 @@ class Recipe
     public function getIngredients()
     {
         return $this->ingredients;
+    }
+
+    /**
+     * Add directions
+     *
+     * @param \AppBundle\Entity\Direction $directions
+     * @return Recipe
+     */
+    public function addDirection(\AppBundle\Entity\Direction $directions)
+    {
+        $this->directions[] = $directions;
+
+        return $this;
+    }
+
+    /**
+     * Remove directions
+     *
+     * @param \AppBundle\Entity\Direction $directions
+     */
+    public function removeDirection(\AppBundle\Entity\Direction $directions)
+    {
+        $this->directions->removeElement($directions);
+    }
+
+    /**
+     * Get directions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDirections()
+    {
+        return $this->directions;
     }
 }
