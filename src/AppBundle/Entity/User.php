@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -44,6 +45,15 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="user")
+     */
+    private $recipes;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -160,5 +170,38 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
+    }
+
+    /**
+     * Add recipes
+     *
+     * @param \AppBundle\Entity\Recipe $recipes
+     * @return User
+     */
+    public function addRecipe(\AppBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes[] = $recipes;
+
+        return $this;
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param \AppBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\AppBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
+
+    /**
+     * Get recipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRecipes()
+    {
+        return $this->recipes;
     }
 }
