@@ -35,6 +35,11 @@ class Ingredient
      */
     private $amount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="ingredients")
+     * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
+     */
+    private $recipe;
 
     /**
      * Get id
@@ -90,5 +95,28 @@ class Ingredient
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * Set recipe
+     *
+     * @param \AppBundle\Entity\Recipe $recipe
+     * @return Ingredient
+     */
+    public function setRecipe(\AppBundle\Entity\Recipe $recipe = null)
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * Get recipe
+     *
+     * @return \AppBundle\Entity\Recipe 
+     */
+    public function getRecipe()
+    {
+        return $this->recipe;
     }
 }

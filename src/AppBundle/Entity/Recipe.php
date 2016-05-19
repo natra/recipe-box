@@ -59,6 +59,16 @@ class Recipe
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe")
+     */
+    private $ingredients;
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -155,5 +165,38 @@ class Recipe
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add ingredients
+     *
+     * @param \AppBundle\Entity\Ingredient $ingredients
+     * @return Recipe
+     */
+    public function addIngredient(\AppBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients[] = $ingredients;
+
+        return $this;
+    }
+
+    /**
+     * Remove ingredients
+     *
+     * @param \AppBundle\Entity\Ingredient $ingredients
+     */
+    public function removeIngredient(\AppBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients->removeElement($ingredients);
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
     }
 }
