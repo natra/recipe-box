@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Recipe;
+use AppBundle\Entity\Ingredient;
+use AppBundle\Entity\Direction;
 use AppBundle\Form\RecipeType;
 
 /**
@@ -42,6 +44,14 @@ class RecipeController extends Controller
     public function newAction(Request $request)
     {
         $recipe = new Recipe();
+        // $i1 = new Ingredient();
+        // $i1 -> setName("fdgdfg");
+        // $i1 -> setAmount("fdgdfg");
+        // $recipe -> addIngredient($i1);
+        // $i12 = new Ingredient();
+        // $i12 -> setName("fdgdfg");
+        // $i12 -> setAmount("fdgdfg");
+        // $recipe -> addIngredient($i12);
         $form = $this->createForm('AppBundle\Form\RecipeType', $recipe);
         $form->handleRequest($request);
 

@@ -1,16 +1,47 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'form/fields.html.twig' %}
+
 {% block body %}
-    <h1>Recipe creation</h1>
+    <h1 class="create-recipe-heading">Create new recipe</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'recipe-form'}}) }}
+        {{ form_widget(form.title) }}
+        {{ form_widget(form.description) }}
+
+        <div class="ingredients_container">
+            <h3>Ingredients</h3>
+            <ul class="ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
+                {% for ingredient in form.ingredients %}
+                    {{ form_widget(ingredient) }}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="directions_container">
+            <h3>Directions</h3>
+            <ul class="directions" data-prototype="{{ form_widget(form.directions.vars.prototype)|e }}">
+                {% for direction in form.directions %}
+                    {{ form_widget(direction) }}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="create-recipe-button-container">
+            <input type="submit" value="Create" class="btn btn-primary create-recipe-button" />
+
+        </div>
     {{ form_end(form) }}
-
+    
     <ul>
         <li>
-            <a href="{{ path('recipe_index') }}">Back to the list</a>
+            <a href="{{ path('recipe_index') }}" class="btn btn-default">Back to the list</a>
         </li>
     </ul>
+    
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/recipe-form.js') }}">
+
 {% endblock %}

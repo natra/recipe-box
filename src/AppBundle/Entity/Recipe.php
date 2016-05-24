@@ -60,12 +60,12 @@ class Recipe
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe", cascade={"persist" })
      */
     private $ingredients;
 
     /**
-     * @ORM\OneToMany(targetEntity="Direction", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="Direction", mappedBy="recipe", cascade={"persist"})
      */
     private $directions;
 
@@ -73,11 +73,20 @@ class Recipe
     {
         $this->ingredients = new ArrayCollection();
         $this->directions = new ArrayCollection();
+        $this->updatedAt= new \DateTime();
     }
 
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt= new \DateTime();
     }
 
     /**
@@ -179,9 +188,9 @@ class Recipe
      * @param \AppBundle\Entity\Ingredient $ingredients
      * @return Recipe
      */
-    public function addIngredient(\AppBundle\Entity\Ingredient $ingredients)
+    public function addIngredient(\AppBundle\Entity\Ingredient $ingredient)
     {
-        $this->ingredients[] = $ingredients;
+        $this->ingredients[] = $ingredient;
 
         return $this;
     }
@@ -191,9 +200,9 @@ class Recipe
      *
      * @param \AppBundle\Entity\Ingredient $ingredients
      */
-    public function removeIngredient(\AppBundle\Entity\Ingredient $ingredients)
+    public function removeIngredient(\AppBundle\Entity\Ingredient $ingredient)
     {
-        $this->ingredients->removeElement($ingredients);
+        $this->ingredients->removeElement($ingredient);
     }
 
     /**
@@ -212,9 +221,9 @@ class Recipe
      * @param \AppBundle\Entity\Direction $directions
      * @return Recipe
      */
-    public function addDirection(\AppBundle\Entity\Direction $directions)
+    public function addDirection(\AppBundle\Entity\Direction $direction)
     {
-        $this->directions[] = $directions;
+        $this->directions[] = $direction;
 
         return $this;
     }
@@ -224,9 +233,9 @@ class Recipe
      *
      * @param \AppBundle\Entity\Direction $directions
      */
-    public function removeDirection(\AppBundle\Entity\Direction $directions)
+    public function removeDirection(\AppBundle\Entity\Direction $direction)
     {
-        $this->directions->removeElement($directions);
+        $this->directions->removeElement($direction);
     }
 
     /**

@@ -1,11 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Recipe edit</h1>
+    <h1 class="create-recipe-heading">Edit recipe</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate', 'class': 'recipe-form'}}) }}
+        {{ form_widget(edit_form.title) }}
+        {{ form_widget(edit_form.description) }}
+        <div class="image-upload-container">
+            {{ form_widget(edit_form.imageFile) }}
+        </div>
+        <div class="ingredients_container">
+            <h3>Ingredients</h3>
+            <ul class="ingredients" data-prototype="{{ form_widget(edit_form.ingredients.vars.prototype)|e }}">
+                {% for ingredient in edit_form.ingredients %}
+                    <li>{{ form_widget(ingredient) }}
+                        <a class="btn btn-default" href="#">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="directions_container">
+            <h3>Directions</h3>
+            <ul class="directions" data-prototype="{{ form_widget(edit_form.directions.vars.prototype)|e }}">
+                {% for direction in edit_form.directions %}
+                    <li>{{ form_widget(direction) }}
+                        <a class="btn btn-default" href="#">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="edit-recipe-button-container">
+            <input type="submit" value="Edit" class="btn btn-primary edit-recipe-button" />
+        </div>
     {{ form_end(edit_form) }}
 
     <ul>

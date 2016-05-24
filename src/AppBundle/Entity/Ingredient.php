@@ -36,8 +36,8 @@ class Ingredient
     private $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="ingredients")
-     * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="ingredients", )
+     * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id",onDelete="CASCADE")
      */
     private $recipe;
 
@@ -107,7 +107,9 @@ class Ingredient
     {
         $this->recipe = $recipe;
 
-        return $this;
+        // return $this;
+
+
     }
 
     /**

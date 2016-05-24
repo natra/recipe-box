@@ -74,3 +74,58 @@ footer {
 	}
 }
 
+/*================================================= RECIPE NESTED FORM ======================================================*/
+
+.ingredients_container, .directions_container {
+	width: 48%;
+	float: left;
+	margin-top: 30px;
+}
+.directions_container {
+	float: right;
+}
+
+.ingredients_container .ingredients, .directions_container .directions{
+	padding: 5px;
+	border: 1px dashed #987583;
+	background-color: #fff;
+}
+
+.ingredients_container .ingredients li, .directions_container .directions li{
+	clear: both;
+}
+
+.ingredients_container .ingredients .form-group{
+	width: 40%;
+	float: left;
+}
+
+.directions_container .directions .form-group{
+	width: 85%;
+	float: left;
+}
+
+.ingredients li .form-group:first-of-type, .directions li .form-group:first-of-type{
+	margin-right: 5px;
+}
+
+.ingredients_container h3, .directions_container h3{
+	background-color: #F2F9FD;
+	position: relative;
+	bottom: 5px;
+}
+
+.create-recipe-heading {
+	margin-bottom: 20px;
+}
+
+.recipe-form .recipe-title-input {
+	margin-bottom: 10px;
+}
+
+
+.create-recipe-button-container {
+	clear: both;
+	padding-top: 30px;
+}
+
