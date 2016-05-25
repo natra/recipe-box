@@ -8,6 +8,10 @@
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'recipe-form'}}) }}
         {{ form_widget(form.title) }}
         {{ form_widget(form.description) }}
+        <div class="image-upload-container">
+            {{ form_widget(form.imageFile) }}
+        </div>
+        
 
         <div class="ingredients_container">
             <h3>Ingredients</h3>

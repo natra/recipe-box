@@ -28,15 +28,23 @@ class RecipeType extends AbstractType
                     'class' => 'recipe-description-input'
                 )
             ))
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'allow_delete'  => true, 
+                'download_link' => true,
+                'block_name' => 'fileBlock' 
+            ))
             ->add('ingredients', CollectionType::class, array(
                 'entry_type' => IngredientType::class,
                 'allow_add' => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false,
             ))
             ->add('directions', CollectionType::class, array(
                 'entry_type' => DirectionType::class,
                 'allow_add' => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false,
             ))
         ;
     }

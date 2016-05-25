@@ -15,6 +15,13 @@
 
 {% endblock %}
 
+{% block _recipe_fileBlock_widget %}
+
+<p class="image-label">Image upload</p>
+	{{- form_widget(form) -}}
+
+{% endblock %}
+
 
 {% block vich_image_widget %}
 {% spaceless %}
