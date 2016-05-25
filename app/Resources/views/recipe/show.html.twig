@@ -1,40 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Recipe</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ recipe.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ recipe.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ recipe.description }}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if recipe.updatedAt %}{{ recipe.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('recipe_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="container-fluid first_row">
+        <div class="row">
+            <div class="img-container">
+                <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}">
+            </div>
+            <div class="recipe_header">
+                <h2>{{ recipe.title }}</h2>
+                <p class="recipe_description">
+                    {{ recipe.description }} 
+                </p>
+                <p class="author_info">
+                    Submitted by {{ recipe.user.userName }}
+                    
+                </p>
+                {% if app.user == recipe.user %}
+                    <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}" class="btn btn-primary">Edit this recipe</a>
+                {% endif %}
+            </div>
+        </div>
+        
+    </div>
+    <div class="ingredients_box">
+        <h2>Ingredients</h2>
+        <ul>
+            {% for ingredient in recipe.ingredients %}
+                <li>{{ ingredient.name }}, {{ ingredient.amount }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="directions_box">
+        <h2>Directions</h2>
+        <ol>
+            {% for direction in recipe.directions %}
+                <li>{{ direction.step }}</li>
+            {% endfor %}
+        </ol>
+    </div>
 {% endblock %}

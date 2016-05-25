@@ -44,14 +44,8 @@ class RecipeController extends Controller
     public function newAction(Request $request)
     {
         $recipe = new Recipe();
-        // $i1 = new Ingredient();
-        // $i1 -> setName("fdgdfg");
-        // $i1 -> setAmount("fdgdfg");
-        // $recipe -> addIngredient($i1);
-        // $i12 = new Ingredient();
-        // $i12 -> setName("fdgdfg");
-        // $i12 -> setAmount("fdgdfg");
-        // $recipe -> addIngredient($i12);
+        $user = $this->getUser();
+        $recipe->setUser($user);
         $form = $this->createForm('AppBundle\Form\RecipeType', $recipe);
         $form->handleRequest($request);
 

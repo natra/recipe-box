@@ -124,7 +124,7 @@ footer {
 }
 
 
-.create-recipe-button-container {
+.create-recipe-button-container, .edit-recipe-button-container {
 	clear: both;
 	padding-top: 30px;
 }
@@ -133,10 +133,18 @@ footer {
 	margin-top: 20px;
 }
 
+.edit-recipe-button {
+	margin-bottom: 20px;
+}
+
 .image-label {
 	float: left;
 	margin-right: 20px;
 	line-height: 27px;
+}
+
+.edit-image{
+	margin: 10px 0 20px;
 }
 
 
@@ -223,6 +231,121 @@ footer {
 		width: 33%;
 		height: 300px;
 		float: left;
+	}
+}
+
+/*================================= RECIPE SHOW ======================*/
+
+.img-container {
+	width: 100%;
+	height: 250px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.img-container img {
+	position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 250px;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+.recipe_header h2, .ingredients_box h2, .directions_box h2 {
+	color: #987583;
+	font-size: 21px;
+	font-weight: bold;
+	text-align: center;
+	padding: 20px 0 30px;
+}
+
+.recipe_header .recipe_description {
+	text-align: justify;
+	line-height: 1.4em;
+}
+
+.recipe_header .author_info {
+	padding: 20px 0;
+	font-style: italic;
+	font-size: 0.8em;
+}
+
+.ingredients_box ul {
+	list-style-type: circle;
+}
+
+.ingredients_box ul li{
+	padding-bottom: 20px;
+	margin-left: 30px;
+}
+
+.ingredients_box ul li:first-child{
+	padding-top: 10px;
+}
+
+.directions_box ol {
+	list-style-type: decimal;
+}
+
+.directions_box ol li {
+	margin-left: 30px;
+	margin-right: 20px;
+	padding-bottom: 20px;
+	text-align: justify;
+	line-height: 1.3em;
+}
+
+@media (min-width: 768px) {
+	.ingredients_box ul {
+		text-align: center;
+	}
+	.ingredients_box ul li {
+		margin: 0;
+	}
+	.recipe_header {
+		margin-top: 40px;
+	}
+	.recipe_header, .ingredients_box, .directions_box {
+		background-color: #fff;
+		box-shadow: 0px 0px 2px #987583;
+		padding: 0 30px;
+		margin-bottom: 40px;
+	}
+	.directions_box {
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 992px ) {
+	.img-container {
+		width: 27%;
+		float: left;
+		margin-bottom: 0;
+	}
+	.recipe_header {
+		width: 70%;
+		float: right;
+		margin-left: 20px;
+		margin-top: 0;
+		margin-bottom: 0;
+		min-height: 250px;
+	}
+	.container-fluid.first_row {
+		margin-bottom: 30px;
+	}
+	.ingredients_box, .directions_box{
+		width: 48%;
+		float: left;
+	}
+
+	.directions_box{
+		width: 48%;
+		float: right;
+		margin-bottom: 30px;
 	}
 }
 
