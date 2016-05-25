@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="recipes-index">
+        <div class="container-fluid">
+            {% for recipe in recipes %}
+                <article class="recipe">
+                    <div class="img-container">
+                        <a href="{{ path('recipe_show', { 'id': recipe.id }) }}"><img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}"></a>
+                    </div>
+                    <div class="title-container">
+                        <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.title }}</a>
+                    </div>
+                </article>
+            {% endfor %}     
+        </div>
+    </section> 
+{% endblock %}

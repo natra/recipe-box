@@ -13,9 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+
+        $em = $this->getDoctrine()->getManager();
+        $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
+
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
+        return $this->render('recipe/homeIndex.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'recipes' => $recipes,
         ));
+
     }
 }
