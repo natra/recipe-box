@@ -272,12 +272,12 @@ h1.recipe-index, h1.user-index {
           transform: translate(-50%,-50%);
 }
 
-.recipe_header h2, .ingredients_box h2, .directions_box h2 {
+.recipe_header h2, .ingredients_box h2, .ingredients_box h3, .directions_box h2, .directions_box h3, .user-recipe-list-heading {
 	color: #987583;
 	font-size: 21px;
 	font-weight: bold;
 	text-align: center;
-	padding: 20px 0 30px;
+	padding: 50px 0 30px;
 }
 
 .recipe_header .recipe_description {
@@ -297,7 +297,7 @@ h1.recipe-index, h1.user-index {
 
 .ingredients_box ul li{
 	padding-bottom: 20px;
-	margin-left: 30px;
+	margin-left: 14px;
 }
 
 .ingredients_box ul li:first-child{
@@ -316,15 +316,86 @@ h1.recipe-index, h1.user-index {
 	line-height: 1.3em;
 }
 
+.recipe-edit-button {
+	margin-bottom: 20px;
+	font-weight: normal;
+}
+
+hr {
+	border-width: 10px;
+	margin: 60px 0;
+	clear: both;
+}
+
+hr:last-of-type {
+	display: none;
+}
+
+.user-recipe {
+	width: 400px;
+}
+
+.user-main-info {
+
+}
+
+
+
+.user-main-info h2 {
+	font-size: 25px;
+	margin: 20px 0;
+	color: #987583;
+	font-weight: bold;
+}
+
+.user-recipe-list-heading {
+	margin: 20px 0 40px;
+	text-decoration: underline;
+	padding: 30px 0 0;
+}
+
+.recipe-count {
+	margin: 30px 0;
+	font-weight: bold;
+	color: #F2F9FD;
+	font-size: 25px;
+}
+
+.recipe-count span{
+	background-color: #110D23;
+	/*border: 2px solid;*/
+  border-radius: 25px;
+  padding: 0 5px;
+}
+
+.user-recipe-edit-button {
+	margin: 20px 0;
+}
+
+.user-main-info h2 {
+	
+	
+}
+
+
+
+.user-main-info, .user-recipe {
+	width: 100%;
+}
+
 @media (min-width: 768px) {
 	.ingredients_box ul {
 		text-align: center;
+		padding-bottom: 30px;
 	}
 	.ingredients_box ul li {
 		margin: 0;
 	}
 	.recipe_header {
-		margin-top: 40px;
+		margin-top: 0;
+		width: 49%;
+		float: right;
+		min-height: 250px;
 	}
 	.recipe_header, .ingredients_box, .directions_box {
 		background-color: #fff;
@@ -335,9 +406,16 @@ h1.recipe-index, h1.user-index {
 	.directions_box {
 		margin-bottom: 10px;
 	}
+	.directions_box ol{
+		padding-bottom: 30px;
+	}
+	.img-container{
+		width: 48%;
+		float: left;
+	}
 }
 
-@media (min-width: 992px ) {
+@media (min-width: 992px) {
 	.img-container {
 		width: 27%;
 		float: left;
@@ -363,6 +441,19 @@ h1.recipe-index, h1.user-index {
 		width: 48%;
 		float: right;
 		margin-bottom: 30px;
+	}
+}
+
+/*=================================================== USER SHOW ===========================================================*/
+
+
+
+@media (min-width: 768px) {
+	.user-main-info {
+		background-color: #fff;
+		box-shadow: 0px 0px 2px #987583;
+		padding: 20px 30px 30px;
+		margin-bottom: 40px;
 	}
 }
 

@@ -1,36 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="user-main-info">
+        <h2>{{ user.username }}</h2>
+        <p>Number of recipes submitted:</p>
+        <p class="recipe-count"><span>{{ user.recipes.count() }}</span></p>
+        {% if app.user == user %}
+            <a href="{{ path('recipe_new') }}" class="btn btn-default">Create new recipe</a>
+        {% endif %}
+    </div>
+    <div class="user-recipe">
+        <h2 class="user-recipe-list-heading">{{ user.username }}'s recipes</h2>
+        <section>
+            {% for recipe in user.recipes %}
+                <article>
+                    <div class="container-fluid first_row">
+                        <div class="row">
+                            <div class="img-container">
+                                <img src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}">
+                            </div>
+                            <div class="recipe_header">
+                                <h2>{{ recipe.title }}
+                                    {% if app.user == recipe.user %}
+                                        | <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}" class=" recipe-edit-button">Edit this recipe</a>
+                                    {% endif %}
+                                </h2>
+                                <p class="recipe_description">
+                                    {{ recipe.description }} 
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ingredients_box">
+                        <h2>Ingredients</h2>
+                        <ul>
+                            {% for ingredient in recipe.ingredients %}
+                                <li>{{ ingredient.name }}, {{ ingredient.amount }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="directions_box">
+                        <h2>Directions</h2>
+                        <ol>
+                            {% for direction in recipe.directions %}
+                                <li>{{ direction.step }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </article>
+                {% if user.recipes.count() > 1 %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
+        </section>
+    </div>
 {% endblock %}
