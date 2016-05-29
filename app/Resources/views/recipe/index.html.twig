@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Recipe list</h1>
+    <h1 class="recipe-index">Recipe list</h1>
 
-    <table>
+    <table class="table table-striped recipe-index">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Updatedat</th>
+                <th>Ingredients</th>
+                <th>Directions</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,14 +21,16 @@
                 <td><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.id }}</a></td>
                 <td>{{ recipe.title }}</td>
                 <td>{{ recipe.description }}</td>
-                <td>{% if recipe.updatedAt %}{{ recipe.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ recipe.ingredients.count() }}</td>
+                <td>{{ recipe.directions.count() }}</td>
+                <td>{{ recipe.imageName }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">show</a>
+                            <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}" class="btn btn-default">Edit</a>
                         </li>
                         <li>
-                            <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">edit</a>
+                            <button class="btn btn-danger">Delete</button>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +41,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('recipe_new') }}">Create a new entry</a>
+            <a href="{{ path('recipe_new') }}" class="btn btn-primary">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}

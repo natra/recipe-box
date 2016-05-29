@@ -129,7 +129,7 @@ footer {
 	padding-top: 30px;
 }
 
-.delete-recipe-button {
+.delete-recipe-button, .delete-user-button {
 	margin-top: 20px;
 }
 
@@ -232,6 +232,23 @@ footer {
 		height: 300px;
 		float: left;
 	}
+}
+
+.table.recipe-index th, .table.user-index th {
+	text-align: center;
+}
+
+h1.recipe-index, h1.user-index {
+	font-size: 25px;
+	margin-bottom: 20px;
+}
+
+.table.user-index li {
+	display: inline;
+}
+
+.table.recipe-index li:first-of-type {
+	margin-bottom: 5px;
 }
 
 /*================================= RECIPE SHOW ======================*/

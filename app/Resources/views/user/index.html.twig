@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User list</h1>
+    <h1 class="user-index">User list</h1>
 
-    <table>
+    <table class="table table-striped user-index">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Recipes</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,13 +19,14 @@
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
+                <td>{{ user.recipes.count() }}</td>
                 <td>
-                    <ul>
+                    <ul >
                         <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                            <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-default">Edit</a>
                         </li>
                         <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                            <button class="btn btn-danger">Delete</button>
                         </li>
                     </ul>
                 </td>
@@ -35,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('user_new') }}">Create a new entry</a>
+            <a href="{{ path('user_new') }}" class="btn btn-primary">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}
