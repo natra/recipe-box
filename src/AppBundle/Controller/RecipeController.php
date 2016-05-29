@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -10,6 +12,8 @@ use AppBundle\Entity\Recipe;
 use AppBundle\Entity\Ingredient;
 use AppBundle\Entity\Direction;
 use AppBundle\Form\RecipeType;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Recipe controller.
@@ -87,16 +91,39 @@ class RecipeController extends Controller
      */
     public function editAction(Request $request, Recipe $recipe)
     {
+        $originalIngredients = new ArrayCollection();
+        $originalDirections = new ArrayCollection();
+        foreach ($recipe->getIngredients() as $ingredient){
+            $originalIngredients->add($ingredient);
+        }  
+        foreach ($recipe->getDirections() as $direction){
+            $originalDirections->add($direction);
+        }  
         $deleteForm = $this->createDeleteForm($recipe);
         $editForm = $this->createForm('AppBundle\Form\RecipeType', $recipe);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            foreach ($originalIngredients as $ingredient) {
+                if(false === $recipe->getIngredients()->contains($ingredient)){
+                    $recipe->getIngredients()->removeElement($ingredient);
+                    $em->persist($ingredient);
+                    $em->remove($ingredient);
+                }
+            }
+            foreach ($originalDirections as $direction) {
+                if(false === $recipe->getDirections()->contains($direction)){
+                    $recipe->getDirections()->removeElement($direction);
+                    $em->persist($direction);
+                    $em->remove($direction);
+                }
+            }
+
             $em->persist($recipe);
             $em->flush();
 
-            return $this->redirectToRoute('recipe_edit', array('id' => $recipe->getId()));
+            return $this->redirectToRoute('recipe_show', array('id' => $recipe->getId()));
         }
 
         return $this->render('recipe/edit.html.twig', array(

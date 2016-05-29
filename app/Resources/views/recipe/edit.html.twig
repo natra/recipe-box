@@ -15,7 +15,7 @@
             <ul class="ingredients" data-prototype="{{ form_widget(edit_form.ingredients.vars.prototype)|e }}">
                 {% for ingredient in edit_form.ingredients %}
                     <li>{{ form_widget(ingredient) }}
-                        <a class="btn btn-default" href="#">Delete</a>
+                        <button class="btn btn-default">Delete</button>
                     </li>
                 {% endfor %}
             </ul>
@@ -25,7 +25,7 @@
             <ul class="directions" data-prototype="{{ form_widget(edit_form.directions.vars.prototype)|e }}">
                 {% for direction in edit_form.directions %}
                     <li>{{ form_widget(direction) }}
-                        <a class="btn btn-default" href="#">Delete</a>
+                        <button class="btn btn-default">Delete</button>
                     </li>
                 {% endfor %}
             </ul>

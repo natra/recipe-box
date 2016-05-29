@@ -41,6 +41,11 @@ jQuery(document).ready(function() {
         addDirectionForm($collectionDirectionsHolder, $newDirectionLinkLi);
     });
 
+    $('ul.directions, ul.ingredients').on('click','button',function(e){
+        e.preventDefault();
+        $(this).parent().remove();
+    });
+
 
 });
 
