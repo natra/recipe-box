@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Recipe
@@ -27,14 +28,24 @@ class Recipe
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 40,
+     *      minMessage = "The recipe's title must be at least {{ limit }} characters long",
+     *      maxMessage = "The recipe's title cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      minMessage = "The recipe's description must be at least {{ limit }} characters long"
+     * )
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -80,8 +91,8 @@ class Recipe
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      * @var string
      */
     private $imageName;

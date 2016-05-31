@@ -6,9 +6,12 @@
     <h1 class="create-recipe-heading">Create new recipe</h1>
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'recipe-form'}}) }}
+        {{ form_errors(form.title) }}
         {{ form_widget(form.title) }}
+        {{ form_errors(form.description) }}
         {{ form_widget(form.description) }}
         <div class="image-upload-container">
+            {{ form_errors(form.imageFile) }}
             {{ form_widget(form.imageFile) }}
         </div>
         
@@ -17,6 +20,7 @@
             <h3>Ingredients</h3>
             <ul class="ingredients" data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
                 {% for ingredient in form.ingredients %}
+                    {{ form_errors(ingredient) }}
                     {{ form_widget(ingredient) }}
                 {% endfor %}
             </ul>
@@ -26,6 +30,7 @@
             <h3>Directions</h3>
             <ul class="directions" data-prototype="{{ form_widget(form.directions.vars.prototype)|e }}">
                 {% for direction in form.directions %}
+                    {{ form_errors(direction) }}
                     {{ form_widget(direction) }}
                 {% endfor %}
             </ul>

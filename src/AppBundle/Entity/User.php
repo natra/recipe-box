@@ -26,21 +26,34 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 20,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     *      maxMessage = "Your username cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(name="username", type="string", length=30, unique=true)
      */
     private $username;
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="email", type="string", length=50, unique=true)
      */
     private $email;
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 30,
+     *      minMessage = "Your password must be at least {{ limit }} characters long",
+     *      maxMessage = "Your password cannot be longer than {{ limit }} characters"
+     * )
      * @ORM\Column(name="password", type="string", length=64)
      */
     private $password;
