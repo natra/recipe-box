@@ -168,4 +168,21 @@ class RecipeController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     *
+     * @Route("/{id}/ajaxDeleteRecipe", name="ajax_recipe_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function ajaXDeleteAction(Request $request, Recipe $recipe)
+    {
+        $isAjax = $this->get('Request')->isXMLHttpRequest();
+        if ($isAjax) {  
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($recipe);
+            $em->flush();     
+            return new JsonResponse(array('data' => 'this is a json response'));
+        }
+        return new Response('This is not ajax', 400);
+    }
 }

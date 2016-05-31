@@ -53,7 +53,15 @@ jQuery(document).ready(function() {
             $userDataRow.remove();
         });
     });
-
+    $('table.recipe-index').on('click', 'button.delete-recipe-button', function(e){
+        e.preventDefault();
+        alert('ok');
+        $recipeDataRow = $(this).parents('tr.recipeDataRow').first();
+        $recipeId = $recipeDataRow.find('td.recipeId').first().text();
+        $.post('/recipe/'+$recipeId+'/ajaxDeleteRecipe',function(data){
+            $recipeDataRow.remove();
+        });
+    });
 });
 
 function addIngredientForm($collectionHolder, $newIngredientLinkLi) {
