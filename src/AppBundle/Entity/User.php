@@ -141,7 +141,11 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles = array('ROLE_USER');
+        if ($this->username == 'admin'){
+            $roles[] = 'ROLE_ADMIN';
+        }
+        return $roles;
     }
 
     public function eraseCredentials()
