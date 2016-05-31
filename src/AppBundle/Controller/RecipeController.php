@@ -30,6 +30,14 @@ class RecipeController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->isGranted('ROLE_ADMIN')){
+            if($this->isGranted('ROLE_USER')){
+                return $this->redirectToRoute('homepage');
+            } else {
+                return $this->redirectToRoute('login');
+            }
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
@@ -47,6 +55,10 @@ class RecipeController extends Controller
      */
     public function newAction(Request $request)
     {
+        if(!$this->isGranted('ROLE_USER')){
+            return $this->redirectToRoute('login');
+        }
+
         $recipe = new Recipe();
         $user = $this->getUser();
         $recipe->setUser($user);
@@ -91,6 +103,10 @@ class RecipeController extends Controller
      */
     public function editAction(Request $request, Recipe $recipe)
     {
+        if (!$this->isGranted('edit', $recipe)){
+            return $this->redirectToRoute('homepage');
+        }
+
         $originalIngredients = new ArrayCollection();
         $originalDirections = new ArrayCollection();
         foreach ($recipe->getIngredients() as $ingredient){

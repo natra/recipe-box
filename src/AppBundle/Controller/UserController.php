@@ -26,10 +26,17 @@ class UserController extends Controller
      */
     public function indexAction()
     {
+        
+        if(!$this->isGranted('ROLE_ADMIN')){
+            if($this->isGranted('ROLE_USER')){
+                return $this->redirectToRoute('homepage');
+            } else {
+                return $this->redirectToRoute('login');
+            }
+        }
+
         $em = $this->getDoctrine()->getManager();
-
         $users = $em->getRepository('AppBundle:User')->findAll();
-
         return $this->render('user/index.html.twig', array(
             'users' => $users,
         ));
@@ -85,6 +92,15 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        $usr = $this->getUser();
+        if($usr != $user && !$this->isGranted('ROLE_ADMIN')){
+            if($this->isGranted('ROLE_USER')){
+                return $this->redirectToRoute('homepage');
+            } else {
+                return $this->redirectToRoute('login');
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
