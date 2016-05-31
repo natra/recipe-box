@@ -46,7 +46,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="user", cascade={"persist"})
      */
     private $recipes;
 

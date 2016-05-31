@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 
@@ -136,5 +138,24 @@ class UserController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     *
+     * @Route("/{id}/ajaxDeleteUser", name="ajax_user_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function ajaXDeleteAction(Request $request, User $user)
+    {
+        $isAjax = $this->get('Request')->isXMLHttpRequest();
+        if ($isAjax) {  
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush(); 
+            $this->get('security.context')->setToken(null);
+            $this->get('request')->getSession()->invalidate();      
+            return new JsonResponse(array('data' => 'this is a json response'));
+        }
+        return new Response('This is not ajax', 400);
     }
 }

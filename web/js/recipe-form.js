@@ -45,7 +45,14 @@ jQuery(document).ready(function() {
         e.preventDefault();
         $(this).parent().remove();
     });
-
+    $('table.user-index').on('click', 'button.delete-user-button', function(e){
+        e.preventDefault();
+        $userDataRow = $(this).parents('tr.userDataRow').first();
+        $userId = $userDataRow.find('td.userId').first().text();
+        $.post('/user/'+$userId+'/ajaxDeleteUser',function(data){
+            $userDataRow.remove();
+        });
+    });
 
 });
 
