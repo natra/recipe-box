@@ -3,6 +3,9 @@
 {% form_theme form 'form/fields.html.twig' %}
 
 {% block body %}
+    {% if not is_granted('ROLE_USER') %}
+        <div class="alert alert-info" role="alert">Since you're not logged in, you can only view this page. To submit a recipe, please sign up.</div>
+    {% endif %}
     <h1 class="create-recipe-heading">Create new recipe</h1>
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'recipe-form'}}) }}

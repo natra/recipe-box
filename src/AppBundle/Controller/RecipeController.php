@@ -55,17 +55,15 @@ class RecipeController extends Controller
      */
     public function newAction(Request $request)
     {
-        if(!$this->isGranted('ROLE_USER')){
-            return $this->redirectToRoute('login');
-        }
-
         $recipe = new Recipe();
-        $user = $this->getUser();
-        $recipe->setUser($user);
+        if ($this->getUser()){
+            $user = $this->getUser();
+            $recipe->setUser($user);
+        }
         $form = $this->createForm('AppBundle\Form\RecipeType', $recipe);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $this->isGranted('ROLE_USER')) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($recipe);
             $em->flush();

@@ -13,8 +13,8 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{{ path('about') }}">About</a></li>
+          <li><a href="{{ path('recipe_new') }}">Create recipe</a></li>
           {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('recipe_new') }}">Create recipe</a></li>
             <li><a href="{{ path('logout') }}">Log out</a></li>
           {% else %}
             <li><a href="{{ path('user_new') }}">Sign up</a></li>
