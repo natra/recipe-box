@@ -446,8 +446,6 @@ hr:last-of-type {
 
 /*=================================================== USER SHOW ===========================================================*/
 
-
-
 @media (min-width: 768px) {
 	.user-main-info {
 		background-color: #fff;
@@ -457,3 +455,28 @@ hr:last-of-type {
 	}
 }
 
+/*==================================================== ABOUT =================================================================*/
+
+.about_section {
+	max-width: 700px;
+	background-color: #fff;
+	box-shadow: 0px 0px 2px #987583;
+	margin: 0 auto;
+
+}
+
+.about_section h2{
+	font-size: 23px;
+	padding: 20px 0 40px;
+}
+
+.about_section p{
+	margin: 20px 10px;
+	line-height: 1.5em;
+	text-align: justify;
+}
+
+.about_section .github-link {
+	text-align: center;
+	padding-bottom: 30px;
+}

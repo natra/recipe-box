@@ -24,4 +24,15 @@ class DefaultController extends Controller
         ));
 
     }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        return $this->render('about.html.twig', array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..')
+        ));
+
+    }
 }
